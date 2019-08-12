@@ -1,0 +1,19 @@
+{
+  "name": "to-do-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SimonasValkiunas/to-do-project.git"
+  },
+  "author": "simonas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SimonasValkiunas/to-do-project/issues"
+  },
+  "homepage": "https://github.com/SimonasValkiunas/to-do-project#readme"
+}
