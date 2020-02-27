@@ -4,14 +4,15 @@ const path = require('path');
 const app = express();
 const cors = require('cors');
 const MongoClient = require('mongodb').MongoClient;
+const config = require('./config.js');
+const TaskClass = require('./models/Task');
+const Task = new TaskClass();
 
-
-const PORT = process.env.PORT || 5000;
-const CLIENT_ADR = "http://127.0.0.1:5500";
+const PORT = process.env.PORT || config.PORT;
 
 
 app.use('*', function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", CLIENT_ADR);
+    res.header("Access-Control-Allow-Origin", config.CLIENT_ADR);
     res.header("Access-Control-Allow-Headers", "X-Requested-With");
     res.header('Access-Control-Allow-Headers', 'Content-Type');
     res.header('Access-Control-Allow-Credentials', true);
@@ -26,13 +27,6 @@ app.use(express.json());
 
 const uri =  "mongodb+srv://simonas:anarchija@cluster0-rmuoz.mongodb.net/test?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true });
-
-//Task schema
-const Task = {
-    _name : "",
-    _description: "",
-    _due_date : "",
-}
 
 app.get('/tasks', (req,res)=>{
     client.connect(err => {
@@ -53,8 +47,7 @@ app.post('/tasks',(req,res)=>{
     client.connect(err => {
         const collection = client.db("TO_DO_DB").collection("Tasks");
         let task = req.body;
-        console.log(req.body);
-        if(checkSchema(task,Task)) {
+        if(Task.checkSchema(task)){
             collection.insertOne(task).then(()=>{
                 res.status(200);
                 res.send(task);
@@ -68,11 +61,3 @@ app.post('/tasks',(req,res)=>{
 });
 
 app.listen(PORT, ()=>console.log(`Server started on port ${PORT}`));
-
-//check if testObj has correct schema
-function checkSchema(testObj,correctObj){
-    for(let key of Object.keys(correctObj)){
-        if(!testObj.hasOwnProperty(key)) return false;
-    }
-    return true;
-}
