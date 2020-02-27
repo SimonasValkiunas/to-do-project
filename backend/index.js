@@ -10,7 +10,6 @@ const Task = new TaskClass();
 
 const PORT = process.env.PORT || config.PORT;
 
-
 app.use('*', function(req, res, next) {
     res.header("Access-Control-Allow-Origin", config.CLIENT_ADR);
     res.header("Access-Control-Allow-Headers", "X-Requested-With");
@@ -21,16 +20,13 @@ app.use('*', function(req, res, next) {
 
 //enable pre-flight
 app.options('*', cors());
-
-
 app.use(express.json());
 
-const uri =  "mongodb+srv://simonas:anarchija@cluster0-rmuoz.mongodb.net/test?retryWrites=true&w=majority";
-const client = new MongoClient(uri, { useNewUrlParser: true });
+const client = new MongoClient(config.mongo_uri, { useNewUrlParser: true });
 
 app.get('/tasks', (req,res)=>{
     client.connect(err => {
-        const collection = client.db("TO_DO_DB").collection("Tasks");
+        const collection = client.db(config.mongo_db).collection(config.mongo_task_collection);
         let tasks = collection.find();
         let results = [];
         tasks.forEach(r=>{
@@ -45,7 +41,7 @@ app.get('/tasks', (req,res)=>{
 
 app.post('/tasks',(req,res)=>{
     client.connect(err => {
-        const collection = client.db("TO_DO_DB").collection("Tasks");
+        const collection = client.db(config.mongo_db).collection(config.mongo_task_collection);
         let task = req.body;
         if(Task.checkSchema(task)){
             collection.insertOne(task).then(()=>{
