@@ -1,0 +1,31 @@
+
+.main{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+.modal{
+    display: flex;
+    width: 30vw;
+    height: fit-content;
+    align-self: center;
+    flex-direction: column;
+    background-color: rgb(248, 246, 246);
+    border-radius: 10px;
+}
+
+.modal .inputs .MuiTextField-root{
+    width: 98%;
+    margin-left: 1%;
+    margin-top: 2%;
+    margin-bottom: 1%;
+}
+
+
+.modal .buttons button{
+    width: 45%;
+    margin: 2.5% 2.5%;
+    border-radius: 5px;
+}

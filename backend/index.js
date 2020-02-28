@@ -43,6 +43,7 @@ app.post('/tasks',(req,res)=>{
     client.connect(err => {
         const collection = client.db(config.mongo_db).collection(config.mongo_task_collection);
         let task = req.body;
+        console.log(task);
         if(Task.checkSchema(task)){
             collection.insertOne(task).then(()=>{
                 res.status(200);

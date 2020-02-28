@@ -1,8 +1,3 @@
-// const Task = {
-//     _name : "",
-//     _description: "",
-//     _due_date : "",
-// }
 
 class Task {
     constructor(_name = null,_description = null,_due_date =null){
