@@ -1,0 +1,21 @@
+
+.card{
+    margin-top: 1vh;
+    display: flex;
+    flex-direction: column;
+    width: 98vw;
+    border-radius: 5px;
+    padding-left: 1vw;
+    padding-right: 1vw;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+}
+
+.main_info{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.main_info h4{ 
+    align-self: center;
+}
